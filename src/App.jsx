@@ -1,5 +1,16 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
 function App() {
-  return <div>React Todo</div>;
+  return (
+    <div
+      css={{
+        background: 'blue',
+      }}
+    >
+      test commit
+    </div>
+  );
 }
 
 export default App;
