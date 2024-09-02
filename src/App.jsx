@@ -46,6 +46,12 @@ function App() {
     }
     setTodos(newTodos);
   };
+  // 특정 인덱스의 할 일의 완료 상태를 토글하는 함수
+  const toggleTodo = (index) => {
+    setTodos(todos.map((todo, i) => 
+      i === index ? { ...todo, completed: !todo.completed } : todo
+    ));
+  };
 
   // 컴포넌트 렌더링
   return (
