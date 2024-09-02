@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Container from '../Components/Container';
 import InputValue from '../Components/InputValue';
 import List from '../Components/List';
@@ -17,9 +17,27 @@ function TodoList() {
   const [isSelectingTodoList, setIsSelectingTodoList] = useState(false);
   const [isSelectingDone, setIsSelectingDone] = useState(false);
 
+  // 초기 데이터 로드
+  useEffect(() => {
+    const savedActiveItems =
+      JSON.parse(localStorage.getItem('activeItems')) || [];
+    const savedCompletedItems =
+      JSON.parse(localStorage.getItem('completedItems')) || [];
+    setActiveItems(savedActiveItems);
+    setCompletedItems(savedCompletedItems);
+  }, []);
+
+  // localStorage 업데이트 함수
+  const updateLocalStorage = (activeItems, completedItems) => {
+    localStorage.setItem('activeItems', JSON.stringify(activeItems));
+    localStorage.setItem('completedItems', JSON.stringify(completedItems));
+  };
+
   const addItem = () => {
     if (inputValue.trim()) {
-      setActiveItems([...activeItems, inputValue]);
+      const newActiveItems = [...activeItems, inputValue];
+      setActiveItems(newActiveItems);
+      updateLocalStorage(newActiveItems, completedItems);
       setInputValue('');
     }
   };
@@ -34,7 +52,7 @@ function TodoList() {
     setSelectedItems([]);
   };
 
-  const toggleSelectItem = (index, isCompleted) => {
+  const toggleSelectItem = (index) => {
     if (selectedItems.includes(index)) {
       setSelectedItems(selectedItems.filter((i) => i !== index));
     } else {
@@ -52,15 +70,22 @@ function TodoList() {
   };
 
   const deleteSelectedItems = (isCompleted) => {
+    let newActiveItems = activeItems;
+    let newCompletedItems = completedItems;
+
     if (isCompleted) {
-      setCompletedItems(
-        completedItems.filter((_, index) => !selectedItems.includes(index))
+      newCompletedItems = completedItems.filter(
+        (_, index) => !selectedItems.includes(index)
       );
+      setCompletedItems(newCompletedItems);
     } else {
-      setActiveItems(
-        activeItems.filter((_, index) => !selectedItems.includes(index))
+      newActiveItems = activeItems.filter(
+        (_, index) => !selectedItems.includes(index)
       );
+      setActiveItems(newActiveItems);
     }
+
+    updateLocalStorage(newActiveItems, newCompletedItems);
     setSelectedItems([]);
   };
 
@@ -75,10 +100,15 @@ function TodoList() {
         color: '#888',
       },
     }));
-    setCompletedItems([...completedItems, ...styledItems]);
-    setActiveItems(
-      activeItems.filter((_, index) => !selectedItems.includes(index))
+    const newActiveItems = activeItems.filter(
+      (_, index) => !selectedItems.includes(index)
     );
+    const newCompletedItems = [...completedItems, ...styledItems];
+
+    setCompletedItems(newCompletedItems);
+    setActiveItems(newActiveItems);
+    updateLocalStorage(newActiveItems, newCompletedItems);
+
     setSelectedItems([]);
     setIsSelectingTodoList(false);
   };
@@ -88,15 +118,19 @@ function TodoList() {
       selectedItems.includes(index)
     );
     const plainItems = itemsToMove.map((item) => item.text);
-    setActiveItems([...activeItems, ...plainItems]);
-    setCompletedItems(
-      completedItems.filter((_, index) => !selectedItems.includes(index))
+    const newCompletedItems = completedItems.filter(
+      (_, index) => !selectedItems.includes(index)
     );
+    const newActiveItems = [...activeItems, ...plainItems];
+
+    setActiveItems(newActiveItems);
+    setCompletedItems(newCompletedItems);
+    updateLocalStorage(newActiveItems, newCompletedItems);
+
     setSelectedItems([]);
     setIsSelectingDone(false);
   };
 
-  // 개별 항목을 Done 섹션으로 이동
   const moveToCompleted = (index) => {
     const itemToMove = activeItems[index];
     const styledItem = {
@@ -106,23 +140,38 @@ function TodoList() {
         color: '#888',
       },
     };
-    setCompletedItems([...completedItems, styledItem]);
-    setActiveItems(activeItems.filter((_, i) => i !== index));
+    const newActiveItems = activeItems.filter((_, i) => i !== index);
+    const newCompletedItems = [...completedItems, styledItem];
+
+    setCompletedItems(newCompletedItems);
+    setActiveItems(newActiveItems);
+    updateLocalStorage(newActiveItems, newCompletedItems);
   };
 
   const moveToAlready = (index) => {
     const itemToMove = completedItems[index];
     const plainItem = itemToMove.text;
-    setActiveItems([...activeItems, plainItem]);
-    setCompletedItems(completedItems.filter((_, i) => i !== index));
+    const newCompletedItems = completedItems.filter((_, i) => i !== index);
+    const newActiveItems = [...activeItems, plainItem];
+
+    setActiveItems(newActiveItems);
+    setCompletedItems(newCompletedItems);
+    updateLocalStorage(newActiveItems, newCompletedItems);
   };
 
   const deleteItem = (index, isCompleted) => {
+    let newActiveItems = activeItems;
+    let newCompletedItems = completedItems;
+
     if (isCompleted) {
-      setCompletedItems(completedItems.filter((_, i) => i !== index));
+      newCompletedItems = completedItems.filter((_, i) => i !== index);
+      setCompletedItems(newCompletedItems);
     } else {
-      setActiveItems(activeItems.filter((_, i) => i !== index));
+      newActiveItems = activeItems.filter((_, i) => i !== index);
+      setActiveItems(newActiveItems);
     }
+
+    updateLocalStorage(newActiveItems, newCompletedItems);
   };
 
   return (
