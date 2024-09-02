@@ -1,5 +1,7 @@
+import '../src/index.css';
+import TodoList from './Pages/TodoList';
 function App() {
-  return <div>React Todo</div>;
+  return <TodoList />;
 }
 
 export default App;
