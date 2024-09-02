@@ -31,6 +31,22 @@ function App() {
     localStorage.setItem('todos', JSON.stringify(todos));
   }, [todos]);
 
+   // 새 할 일을 추가하는 함수
+   const addTodo = (text) => {
+    setTodos(todos.concat({ text, completed: false }));
+  };
+
+  // 특정 인덱스의 할 일을 삭제하는 함수
+  const deleteTodo = (index) => {
+    const newTodos = [];
+    for (let i = 0; i < todos.length; i++) {
+      if (i !== index) {
+        newTodos.push(todos[i]); // 삭제할 인덱스가 아닌 항목만 추가
+      }
+    }
+    setTodos(newTodos);
+  };
+
   // 컴포넌트 렌더링
   return (
     <div css={containerStyle}>
