@@ -1,5 +1,8 @@
 import { useState } from 'react';
 
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
+
 function TodoInput({ addTodo }) {
   const [text, setText] = useState('');
 
@@ -13,14 +16,43 @@ function TodoInput({ addTodo }) {
   };
 
   return (
-    <form className="todo-input" onSubmit={handleSubmit}>
+    <form
+      css={css({
+        height: '10%',
+        display: 'flex',
+        boxAlign: 'center',
+        alignItems: 'center',
+        justifyContent: 'space-evenly',
+      })}
+      onSubmit={handleSubmit}
+    >
       <input
+        css={css({
+          width: '70%',
+          height: '20%',
+          marginBottom: '3%',
+          padding: '5%',
+          borderRadius: '15px',
+          border: 'solid 1px lightgrey',
+        })}
         type="text"
         value={text}
         onChange={(e) => setText(e.target.value)} //state 추적
         placeholder="할일을 입력하세요"
       />
-      <button type="submit">+</button>
+      <button
+        css={css({
+          width: '10%',
+          height: '50%',
+          background: 'none',
+          borderRadius: '8px',
+          border: '1px solid rgb(236, 236, 236)',
+          cursor: 'pointer',
+        })}
+        type="submit"
+      >
+        ➕
+      </button>
     </form>
   );
 }
