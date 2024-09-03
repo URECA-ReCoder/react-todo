@@ -51,6 +51,17 @@ function Container({ children }) {
         },
       })}
     >
+      <div
+        css={{
+          fontSize: '25px',
+          fontWeight: '900',
+          marginBottom: '20px',
+          padding: '10px 0 20px 0',
+          borderBottom: '2px solid white',
+        }}
+      >
+        🧾Todo-List
+      </div>
       {children}
     </div>
   );
