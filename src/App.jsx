@@ -3,8 +3,19 @@ import { css } from '@emotion/react';
 import TodoList from './Components/TodoList';
 import DoneList from './Components/DoneList';
 import Header from './Components/Header';
+import { useEffect, useState } from 'react';
+import { getLocalStorage } from './utils/getLocalStorage';
 
 function App() {
+  const [todoList, setTodoList] = useState([]);
+  useEffect(() => {
+    if (localStorage.getItem('todo') === null) {
+      localStorage.setItem('todo', JSON.stringify([]));
+    } else {
+      setTodoList(getLocalStorage());
+    }
+  }, []);
+
   return (
     <div
       css={css({
@@ -26,9 +37,9 @@ function App() {
           boxShadow: '0px 0px 25px rgba(0, 0, 0, 0.25)',
         })}
       >
-        <Header />
-        <TodoList />
-        <DoneList />
+        <Header setTodoList={setTodoList} />
+        <TodoList todoList={todoList} setTodoList={setTodoList}/>
+        <DoneList todoList={todoList} setTodoList={setTodoList} />
       </div>
     </div>
   );
