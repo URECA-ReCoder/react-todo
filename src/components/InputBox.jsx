@@ -42,7 +42,7 @@ export default function InputBox({ todoList, setTodoList }) {
     }
   `;
 
-  const [text, setText] = useState('');
+  const [text, setText] = useState(''); // input에 입력한 값
   const inputRef = useRef(null);
 
   // form 제출 시 새로고침 방지
@@ -53,11 +53,15 @@ export default function InputBox({ todoList, setTodoList }) {
   // input 값 가져오기
   function onChangeInput(e) {
     setText(e.target.value);
-    //e.target에 있는 <input.../>으로부터 value 값을 가져옴
+    // e.target에 있는 <input.../>으로부터 value 값을 가져옴
   }
 
+  // + 버튼 클릭(form 제출)
   function onClickButton() {
-    //todoItemList에 값 추가
+    // 공백 입력 방지
+    if (text.trim() === '') return;
+
+    // todoItemList에 값 추가
     const AddTodoList = todoList.concat({
       id: todoList.length,
       text,
@@ -65,8 +69,8 @@ export default function InputBox({ todoList, setTodoList }) {
     });
     setTodoList(AddTodoList);
 
-    setText(''); //input 값 초기화
-    inputRef.current.focus(); // 버튼 누른 후 자동 포커싱
+    setText(''); // input 값 초기화
+    inputRef.current.focus(); // 버튼 누른 후에도 input box에 자동 포커싱
   }
 
   return (
@@ -79,8 +83,9 @@ export default function InputBox({ todoList, setTodoList }) {
           ref={inputRef}
           className="input-box"
           placeholder="할일을 입력하세요"
-          onChange={onChangeInput} //input 값이 변하면(이벤트 발생) 메소드 실행
+          onChange={onChangeInput} // input 값이 변하면(이벤트 발생) 메소드 실행
           css={inputStyle}
+          autoFocus
         />
         <button
           className="add-button"
