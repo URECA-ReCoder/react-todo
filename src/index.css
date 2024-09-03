@@ -19,3 +19,6 @@
 *:focus {
   border: none;
 }
+li{
+  list-style-image: url("./images/edit.png") ;
+}

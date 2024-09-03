@@ -23,7 +23,7 @@ function List({
     >
       <ul
         css={css({
-          listStyleType: 'none',
+          // listStyleType: 'none',
           minHeight: '80px',
           maxHeight: '150px',
           backgroundColor: 'rgba(255, 255, 255, 0.281)',
