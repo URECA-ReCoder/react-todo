@@ -7,13 +7,14 @@ import { useEffect, useState } from 'react';
 import { getLocalStorage } from './utils/getLocalStorage';
 
 function App() {
-  const [todoList, setTodoList] = useState(getLocalStorage());
+  const [todoList, setTodoList] = useState(getLocalStorage() || []);
   useEffect(() => {
-    if (localStorage.getItem('todo') === null) {
+    if (getLocalStorage() === null) {
       localStorage.setItem('todo', JSON.stringify([]));
     }
   }, []);
-
+  const notDoneTodoList = todoList.filter((todo) => todo.done === false);
+  const doneTodoList = todoList.filter((todo) => todo.done === true);
   return (
     <div
       css={css({
@@ -36,8 +37,8 @@ function App() {
         })}
       >
         <Header setTodoList={setTodoList} />
-        <TodoList todoList={todoList} setTodoList={setTodoList} />
-        <DoneList todoList={todoList} setTodoList={setTodoList} />
+        <TodoList notDoneTodoList={notDoneTodoList} setTodoList={setTodoList} />
+        <DoneList doneTodoList={doneTodoList} setTodoList={setTodoList} />
       </div>
     </div>
   );
