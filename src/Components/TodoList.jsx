@@ -1,7 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
+import { updateFromLocalStorage } from '../utils/updateFromLocalStorage';
+import { getLocalStorage } from '../utils/getLocalStorage';
 
-function TodoList({ todoList }) {
+function TodoList({ notDoneTodoList, setTodoList }) {
+  const doneTodo = (id) => {
+    updateFromLocalStorage(id);
+    setTodoList(getLocalStorage());
+  };
   return (
     <div
       css={css({
@@ -12,7 +18,7 @@ function TodoList({ todoList }) {
       })}
     >
       <div css={css({ fontSize: '18px', marginBottom: '15px' })}>
-        📋 To Do ({todoList.length})
+        📋 To Do ({notDoneTodoList.length})
       </div>
       <div
         css={css({
@@ -24,7 +30,7 @@ function TodoList({ todoList }) {
           gap: '10px',
         })}
       >
-        {todoList.map((todo, index) => (
+        {notDoneTodoList.map((todo, index) => (
           <div
             key={index}
             css={css({
@@ -44,7 +50,7 @@ function TodoList({ todoList }) {
                 width: '100%',
               })}
             >
-              *<div>{todo.todo}</div>
+              *<div onClick={() => doneTodo(todo.id)}>{todo.todo}</div>
               <div>❌</div>
             </div>
           </div>
