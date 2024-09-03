@@ -2,17 +2,18 @@
 import { css } from '@emotion/react';
 import { TodoItem } from './TodoItem';
 
-function DoneList({ doneTodoList, setTodoList }) {
+function List({ list, setTodoList, listName }) {
   return (
     <div
       css={css({
         height: '220px',
         width: '100%',
         padding: '18px 18px 0 18px',
+        borderBottom: listName == 'TO DO' ? 'solid 1px lightgray' : 'none',
       })}
     >
       <div css={css({ fontSize: '18px', marginBottom: '15px' })}>
-        💿 DONE ({doneTodoList.length})
+        {listName} ({list.length})
       </div>
       <div
         css={css({
@@ -25,10 +26,10 @@ function DoneList({ doneTodoList, setTodoList }) {
           paddingRight: '20px',
         })}
       >
-        <TodoItem todoList={doneTodoList} setTodoList={setTodoList} />
+        <TodoItem todoList={list} setTodoList={setTodoList} />
       </div>
     </div>
   );
 }
 
-export default DoneList;
+export default List;

@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import TodoList from './Components/TodoList';
-import DoneList from './Components/DoneList';
 import Header from './Components/Header';
 import { useEffect, useState } from 'react';
 import { getLocalStorage } from './utils/getLocalStorage';
+import List from './Components/List';
 
 function App() {
   const [todoList, setTodoList] = useState(getLocalStorage() || []);
@@ -37,8 +36,16 @@ function App() {
         })}
       >
         <Header setTodoList={setTodoList} />
-        <TodoList notDoneTodoList={notDoneTodoList} setTodoList={setTodoList} />
-        <DoneList doneTodoList={doneTodoList} setTodoList={setTodoList} />
+        <List
+          listName="📋 TO DO"
+          list={notDoneTodoList}
+          setTodoList={setTodoList}
+        />
+        <List
+          listName="💿 DONE"
+          list={doneTodoList}
+          setTodoList={setTodoList}
+        />
       </div>
     </div>
   );
