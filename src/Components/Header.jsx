@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import { useEffect, useRef } from 'react';
-import { setLocalStorage } from '../utils/setLocalStorage';
+import { addToLocalStorage } from '../utils/addToLocalStorage';
 import { getLocalStorage } from '../utils/getLocalStorage';
 
 function Header({ setTodoList }) {
@@ -12,7 +12,7 @@ function Header({ setTodoList }) {
     if (input.value === '') {
       return;
     }
-    setLocalStorage(input.value);
+    addToLocalStorage(input.value);
     input.value = '';
     inputRef.current.focus();
     setTodoList(getLocalStorage());

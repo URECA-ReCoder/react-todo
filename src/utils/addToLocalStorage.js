@@ -1,6 +1,6 @@
 import { getLocalStorage } from './getLocalStorage';
 
-export const setLocalStorage = (value) => {
+export const addToLocalStorage = (value) => {
   const prevTodo = getLocalStorage();
   const newTodo = prevTodo.concat({
     id: prevTodo.length + 1,
