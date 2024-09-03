@@ -40,6 +40,7 @@ export default function ToDoItemList({
     flex-direction: column;
     justify-content: center;
     padding-left: 10px;
+    margin: 0;
   `;
 
   return (
@@ -49,6 +50,7 @@ export default function ToDoItemList({
       </div>
       <div className="todo-list" css={listStyle}>
         <ul className="ul" css={ulStyle}>
+          {/* todoList에 값이 있을 경우에만 실행 */}
           {todoList &&
             todoList.map((todoItem) => {
               // checkedList 값에 따라 'TO DO 목록' 또는 'DONE 목록' 출력
