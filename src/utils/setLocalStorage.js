@@ -7,6 +7,5 @@ export const setLocalStorage = (value) => {
     todo: value,
     done: false,
   });
-  console.log(newTodo);
   localStorage.setItem('todo', JSON.stringify(newTodo));
 };
