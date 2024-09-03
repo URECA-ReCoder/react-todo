@@ -42,7 +42,10 @@ function Header({ setTodoList }) {
           type="text"
           ref={inputRef}
           onKeyDown={(e) => {
-            e.key === 'Enter' && addTodo();
+            if (e.nativeEvent.isComposing) return;
+            if (e.key === 'Enter') {
+              addTodo();
+            }
           }}
           css={css({
             width: '288px',
