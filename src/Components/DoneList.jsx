@@ -2,12 +2,9 @@
 import { css } from '@emotion/react';
 import { updateFromLocalStorage } from '../utils/updateFromLocalStorage';
 import { getLocalStorage } from '../utils/getLocalStorage';
+import { deleteFromLocalStorage } from '../utils/deleteFromLocalStorage';
 
 function DoneList({ doneTodoList, setTodoList }) {
-  const goNotDone = (id) => {
-    updateFromLocalStorage(id);
-    setTodoList(getLocalStorage());
-  };
   return (
     <div
       css={css({
@@ -42,11 +39,21 @@ function DoneList({ doneTodoList, setTodoList }) {
               *
               <div
                 css={css({ textDecoration: 'line-through' })}
-                onClick={() => goNotDone(todo.id)}
+                onClick={() => {
+                  updateFromLocalStorage(todo.id);
+                  setTodoList(getLocalStorage());
+                }}
               >
                 {todo.todo}
               </div>
-              <div>❌</div>
+              <div
+                onClick={() => {
+                  deleteFromLocalStorage(todo.id);
+                  setTodoList(getLocalStorage());
+                }}
+              >
+                ❌
+              </div>
             </div>
           </div>
         ))}

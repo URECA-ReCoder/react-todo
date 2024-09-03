@@ -2,6 +2,7 @@
 import { css } from '@emotion/react';
 import { updateFromLocalStorage } from '../utils/updateFromLocalStorage';
 import { getLocalStorage } from '../utils/getLocalStorage';
+import { deleteFromLocalStorage } from '../utils/deleteFromLocalStorage';
 
 function TodoList({ notDoneTodoList, setTodoList }) {
   const doneTodo = (id) => {
@@ -50,8 +51,23 @@ function TodoList({ notDoneTodoList, setTodoList }) {
                 width: '100%',
               })}
             >
-              *<div onClick={() => doneTodo(todo.id)}>{todo.todo}</div>
-              <div>❌</div>
+              *
+              <div
+                onClick={() => {
+                  updateFromLocalStorage(todo.id);
+                  setTodoList(getLocalStorage());
+                }}
+              >
+                {todo.todo}
+              </div>
+              <div
+                onClick={() => {
+                  deleteFromLocalStorage(todo.id);
+                  setTodoList(getLocalStorage());
+                }}
+              >
+                ❌
+              </div>
             </div>
           </div>
         ))}
