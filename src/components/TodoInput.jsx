@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/react';
+import { BsFillExclamationTriangleFill } from 'react-icons/bs';
+
 // 할 일 입력 form
 const inputContainer = css`
   padding: 0 20px;
@@ -23,7 +25,7 @@ const inputBox = css`
 `;
 // Todo List 앱 제목
 const appTitle = css`
-  padding: 20px;
+  padding: 20px 20px 0;
   font-style: italic;
 `;
 
@@ -31,7 +33,7 @@ const appTitle = css`
 const TodoInput = ({ todoList, setTodoList }) => {
   const [text, setText] = useState('');
   const inputRef = useRef(null); // 버튼 클릭 후 input 값 초기화 후 focusing
-
+  const [popup, setPopup] = useState(false); // 공백 입력 방지 팝업
   // input 값 가져오기
   const onChangeInput = (e) => {
     setText(e.target.value);
@@ -40,10 +42,16 @@ const TodoInput = ({ todoList, setTodoList }) => {
   const onClickAddButton = (e) => {
     e.preventDefault();
 
+    if (text.length === 0) {
+      setPopup(true);
+      return; // 공백일 경우 이후 코드를 실행하지 않음
+    }
     // TodoItemList에 값 추가
     const nextTodoList = todoList.concat({
       id: todoList.length,
       text,
+      checked: false, // 완료 유무 flag
+      deleted: false, // 삭제 flag
     });
     setTodoList(nextTodoList);
 
@@ -66,11 +74,13 @@ const TodoInput = ({ todoList, setTodoList }) => {
         <h1>Todo List</h1>
         <hr />
       </div>
-      <div css={inputContainer}>
+      <form css={inputContainer}>
         {/* 할 일 입력창 */}
         <input
           type="text"
+          name="todoItem"
           value={text}
+          ref={inputRef}
           onChange={onChangeInput}
           placeholder="할 일을 입력해주세요."
           css={inputBox}
@@ -79,10 +89,35 @@ const TodoInput = ({ todoList, setTodoList }) => {
         <button type="submit" onClick={onClickAddButton} css={todoInputButton}>
           +
         </button>
-      </div>
+      </form>
+
+      {popup ? <Popup popup={popup} setPopup={setPopup} /> : null}
     </div>
   );
 };
+
+// 팝업창 디자인
+function Popup(props) {
+  return (
+    <div
+      className="error-message"
+      onClick={() => {
+        props.setPopup(!props.popup);
+      }}
+    >
+      <p
+        css={css`
+          color: gray;
+          font-size: 13px;
+          padding: 0px;
+          margin: 10px 25px 0;
+        `}
+      >
+        <BsFillExclamationTriangleFill /> 공백은 입력할 수 없습니다.
+      </p>
+    </div>
+  );
+}
 
 // props 값 검증
 TodoInput.propTypes = {
