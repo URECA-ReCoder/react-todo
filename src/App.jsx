@@ -20,10 +20,10 @@ function App() {
         width: '100vw',
         height: '100vh',
         color: 'black',
-        backgroundColor: 'red',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        background: 'linear-gradient(pink,skyblue)',
       })}
     >
       <div
