@@ -14,6 +14,7 @@ export default function ToDoItem({ todoItem, todoList, setTodoList }) {
     }
     font-family: 'LINESeedKR-Rg';
     font-size: 15px;
+    color: rgb(59, 56, 56);
   `;
 
   const spanCheckedStyle = css`
@@ -30,6 +31,10 @@ export default function ToDoItem({ todoItem, todoList, setTodoList }) {
     text-decoration: line-through;
   `;
 
+  const liStyle = css`
+    margin: 3px 0px 3px 0px;
+  `;
+
   const checkBoxStyle = css`
     cursor: pointer;
     appearance: none;
@@ -38,6 +43,7 @@ export default function ToDoItem({ todoItem, todoList, setTodoList }) {
     margin-right: 10px;
     border: 1px solid;
     border-radius: 10px;
+    border-color: rgb(59, 56, 56);
 
     &:checked {
       border-color: transparent;
@@ -51,27 +57,32 @@ export default function ToDoItem({ todoItem, todoList, setTodoList }) {
     background-color: white;
     font-size: 14px;
     color: rgb(59, 56, 56);
-    margin-left: 8px;
+    margin-left: 3px;
     cursor: pointer;
     &:hover {
       color: rgb(247, 196, 218);
     }
   `;
 
+  // checkbox를 클릭하면, todoItem의 checked 값이 토글됨
   function onChangeCheckbox() {
-    const AddTodoList = todoList.map((item) => ({
+    const updatedTodoList = todoList.map((item) => ({
       ...item,
       checked: item.id === todoItem.id ? !item.checked : item.checked,
     }));
-    setTodoList(AddTodoList);
+
+    setTodoList(updatedTodoList);
   }
 
+  // 항목 삭제
   function onDelete(id) {
-    setTodoList(todoList.filter((todoItem) => todoItem.id !== id));
+    // 주어진 id와 일치하지 않는 항목들만 남김(일치하면 필터링 -> 해당 항목 삭제)
+    const updatedTodoList = todoList.filter((todoItem) => todoItem.id !== id);
+    setTodoList(updatedTodoList);
   }
 
   return (
-    <li>
+    <li className="li" css={liStyle}>
       <input
         type="checkbox"
         className="check-box"
