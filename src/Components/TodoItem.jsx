@@ -3,6 +3,7 @@ import { css } from '@emotion/react';
 import { DeleteButton } from './DeleteButton';
 import { updateFromLocalStorage } from '../utils/updateFromLocalStorage';
 import { getLocalStorage } from '../utils/getLocalStorage';
+
 export const TodoItem = ({ todoList, setTodoList }) =>
   todoList.map((todo, index) => (
     <div
