@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
 import 'normalize.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputBox from './components/InputBox.jsx';
 import ToDoItemList from './components/ToDoItemList.jsx';
 
@@ -40,7 +40,16 @@ function App() {
     color: rgb(59, 56, 56);
   `;
 
-  const [todoList, setTodoList] = useState([]); //todoItem을 담을 리스트
+  // 초기 상태를 localStorage에서 불러옴
+  const [todoList, setTodoList] = useState(() => {
+    const savedTodoList = localStorage.getItem('todoList');
+    return savedTodoList ? JSON.parse(savedTodoList) : [];
+  });
+
+  // todoList가 업데이트될 때마다 localStorage에 저장
+  useEffect(() => {
+    localStorage.setItem('todoList', JSON.stringify(todoList));
+  }, [todoList]);
 
   return (
     <div className="body" css={bodyStyle}>
@@ -48,11 +57,14 @@ function App() {
         <h2 className="title" css={mainTitleStyle}>
           To Do List
         </h2>
+        {/* 할 일 입력 */}
         <InputBox todoList={todoList} setTodoList={setTodoList} />
 
         {/* 할 일 목록 */}
         <ToDoItemList
-          title={'📂 TO DO (0)'}
+          title={`📂 TO DO (${
+            todoList.filter((item) => !item.checked).length
+          })`} // 아직 완료되지 않은목록의 길이
           todoList={todoList}
           setTodoList={setTodoList}
           checkedList={false}
@@ -60,7 +72,7 @@ function App() {
 
         {/* 완료된 목록 */}
         <ToDoItemList
-          title={'🗑️ DONE (0)'}
+          title={`🗑️ DONE (${todoList.filter((item) => item.checked).length})`} // 완료된 목록의 길이
           todoList={todoList}
           setTodoList={setTodoList}
           checkedList={true}
