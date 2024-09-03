@@ -23,7 +23,7 @@ function Header({ setTodoList }) {
   }, []);
 
   return (
-    <div>
+    <div css={css({ height: '118px' })}>
       <div css={css({ fontSize: '24px', margin: '18px 18px 0 18px' })}>
         📚 투두리스트
       </div>

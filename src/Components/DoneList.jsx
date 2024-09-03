@@ -1,62 +1,31 @@
 /** @jsxImportSource @emotion/react */
 import { css } from '@emotion/react';
-import { updateFromLocalStorage } from '../utils/updateFromLocalStorage';
-import { getLocalStorage } from '../utils/getLocalStorage';
-import { deleteFromLocalStorage } from '../utils/deleteFromLocalStorage';
+import { TodoItem } from './TodoItem';
 
 function DoneList({ doneTodoList, setTodoList }) {
   return (
     <div
       css={css({
-        height: '235px',
+        height: '220px',
         width: '100%',
-        borderBottom: 'solid 1px lightgray',
         padding: '18px 18px 0 18px',
       })}
     >
-      <div css={css({ fontSize: '18px' })}>🗑️ DONE ({doneTodoList.length})</div>
-      <div css={css({ width: '100%', height: '156px', overflowY: 'scroll' })}>
-        {doneTodoList.map((todo, index) => (
-          <div
-            key={index}
-            css={css({
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              height: '20px',
-              width: '80%',
-            })}
-          >
-            <div
-              css={css({
-                display: 'flex',
-                flexDirection: 'row',
-                textAlign: 'center',
-                alignItems: 'center',
-                width: '100%',
-              })}
-            >
-              *
-              <div
-                css={css({ textDecoration: 'line-through' })}
-                onClick={() => {
-                  updateFromLocalStorage(todo.id);
-                  setTodoList(getLocalStorage());
-                }}
-              >
-                {todo.todo}
-              </div>
-              <div
-                onClick={() => {
-                  deleteFromLocalStorage(todo.id);
-                  setTodoList(getLocalStorage());
-                }}
-              >
-                ❌
-              </div>
-            </div>
-          </div>
-        ))}
+      <div css={css({ fontSize: '18px', marginBottom: '15px' })}>
+        💿 DONE ({doneTodoList.length})
+      </div>
+      <div
+        css={css({
+          width: '100%',
+          height: '156px',
+          overflowY: 'scroll',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '10px',
+          paddingRight: '20px',
+        })}
+      >
+        <TodoItem todoList={doneTodoList} setTodoList={setTodoList} />
       </div>
     </div>
   );
