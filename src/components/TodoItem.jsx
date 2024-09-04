@@ -40,18 +40,17 @@ const DoneSpan = styled.span`
 `;
 
 export default function TodoItem({ todo, handleComplete, handleDelete }) {
-  console.log(todo);
   return (
-    <ListLiStyle key={todo.createTime}>
-      {todo.isComplete ? (
+    <ListLiStyle>
+      {todo.isCompleted ? (
         <DoneListCheckBtn onClick={() => handleComplete(todo)}>v</DoneListCheckBtn>
       ) : (
         <DoListCheckBtn onClick={() => handleComplete(todo)}></DoListCheckBtn>
       )}
-      {todo.isComplete ? (
-        <DoneSpan>{todo.text}</DoneSpan>
+      {todo.isCompleted ? (
+        <DoneSpan>{todo.content}</DoneSpan>
       ) : (
-        <span>{todo.text}</span>
+        <span>{todo.content}</span>
       )}
       <DeleteBtn onClick={() => handleDelete(todo)}>x</DeleteBtn>
     </ListLiStyle>
