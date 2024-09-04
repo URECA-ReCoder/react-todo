@@ -21,6 +21,8 @@ const todoItemTitle = css`
 const line = css`
   margin-bottom: 10px;
   color: lightgray;
+  border-style: dashed;
+  border-width: 2px 0 0 0;
 `;
 
 const TodoItemList = ({ title, todoList, setTodoList, checkedList }) => {

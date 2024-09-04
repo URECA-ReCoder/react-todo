@@ -28,7 +28,13 @@ const appTitle = css`
   padding: 20px 20px 0;
   font-style: italic;
 `;
-
+// hr 태그 스타일
+const line = css`
+  margin-bottom: 10px;
+  color: lightgray;
+  border-style: dashed;
+  border-width: 2px 0 0 0;
+`;
 // 할 일 입력 기능
 const TodoInput = ({ todoList, setTodoList }) => {
   const [text, setText] = useState('');
@@ -71,8 +77,8 @@ const TodoInput = ({ todoList, setTodoList }) => {
   return (
     <div className="todo-input">
       <div className="app-title" css={appTitle}>
-        <h1>Todo List</h1>
-        <hr />
+        <h1>오느리 할 일 ! </h1>
+        <hr css={line} />
       </div>
       <form css={inputContainer}>
         {/* 할 일 입력창 */}
@@ -113,7 +119,7 @@ function Popup(props) {
           margin: 10px 25px 0;
         `}
       >
-        <BsFillExclamationTriangleFill /> 공백은 입력할 수 없습니다.
+        <BsFillExclamationTriangleFill /> 공백은 입력할 수 없어요 ㅠㅠ
       </p>
     </div>
   );

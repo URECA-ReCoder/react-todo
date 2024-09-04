@@ -44,7 +44,7 @@ const TodoTemplete = () => {
 
       {/* 할 일 Item 리스트 */}
       <TodoItemList
-        title={`📋 TO DO (${getTodoCount()})`}
+        title={`📋 할 일 (${getTodoCount()})`}
         todoList={todoList}
         setTodoList={setTodoList}
         checkedList={false} // 체크되지 않은 할 일 목록
@@ -52,7 +52,7 @@ const TodoTemplete = () => {
 
       {/* 완료된 할 일 Item 리스트 */}
       <TodoItemList
-        title={`💿 DONE (${getDoneCount()})`}
+        title={`💿 한 일 (${getDoneCount()})`}
         todoList={todoList}
         setTodoList={setTodoList}
         checkedList={true} // 체크되어 있는 할 일 목록
