@@ -24,33 +24,35 @@ const ListUl = styled.ul`
 `;
 
 export default function TodoList({ todoList, handleComplete, handleDelete }) {
-  const doList = todoList.filter((todo) => !todo.isComplete);
-  const doneList = todoList.filter((todo) => todo.isComplete);
+  const doList = todoList.filter((todo) => !todo.isCompleted); 
+  const doneList = todoList.filter((todo) => todo.isCompleted);
 
   return (
     <>
       <Section>
         <SectionTitle>📋 Todo ({doList.length})</SectionTitle>
         <ListUl>
-          {doList.map((todo) => {
+          {doList.map((todo) => 
             <TodoItem
+              key={todo.createTime}
               todo={todo}
               handleComplete={handleComplete}
               handleDelete={handleDelete}
-            />;
-          })}
+            />
+          )}
         </ListUl>
       </Section>
       <Section>
         <SectionTitle>👍🏻 Done ({doneList.length})</SectionTitle>
         <ListUl>
-          {doneList.map((todo) => {
+          {doneList.map((todo) => 
             <TodoItem
+              key={todo.createTime}
               todo={todo}
               handleComplete={handleComplete}
               handleDelete={handleDelete}
-            />;
-          })}
+            />
+          )}
         </ListUl>
       </Section>
     </>
