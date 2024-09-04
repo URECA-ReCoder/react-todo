@@ -10,6 +10,18 @@ export default function ToDoItemList({
   setTodoList,
   checkedList,
 }) {
+  const listBoxStyle = css`
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      // 스크롤바 모양 변경
+      width: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px; // 스크롤바 모서리 둥글게
+      background: rgb(255, 238, 245); // 스크롤바 색상 변경
+    }
+  `;
+
   const titleStyle = css`
     width: 100%;
     height: 30px;
@@ -44,30 +56,32 @@ export default function ToDoItemList({
   `;
 
   return (
-    <section className="todo-list-box">
+    <>
       <div className="todo-title" css={titleStyle}>
         <span>{title}</span>
       </div>
-      <div className="todo-list" css={listStyle}>
-        <ul className="ul" css={ulStyle}>
-          {/* todoList에 값이 있을 경우에만 실행 */}
-          {todoList &&
-            todoList.map((todoItem) => {
-              // checkedList 값에 따라 'TO DO 목록' 또는 'DONE 목록' 출력
-              if (checkedList !== todoItem.checked) return null;
-              return (
-                // 각각의 todoItem 출력
-                <ToDoItem
-                  key={todoItem.id}
-                  todoItem={todoItem}
-                  todoList={todoList}
-                  setTodoList={setTodoList}
-                />
-              );
-            })}
-        </ul>
-      </div>
-    </section>
+      <section className="todo-list-box" css={listBoxStyle}>
+        <div className="todo-list" css={listStyle}>
+          <ul className="ul" css={ulStyle}>
+            {/* todoList에 값이 있을 경우에만 실행 */}
+            {todoList &&
+              todoList.map((todoItem) => {
+                // checkedList 값에 따라 'TO DO 목록' 또는 'DONE 목록' 출력
+                if (checkedList !== todoItem.checked) return null;
+                return (
+                  // 각각의 todoItem 출력
+                  <ToDoItem
+                    key={todoItem.id}
+                    todoItem={todoItem}
+                    todoList={todoList}
+                    setTodoList={setTodoList}
+                  />
+                );
+              })}
+          </ul>
+        </div>
+      </section>
+    </>
   );
 }
 
