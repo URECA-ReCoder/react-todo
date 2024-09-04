@@ -70,16 +70,10 @@ const Container = styled.div`
 
 function App() {
   const userName = '옹헤';
-  const [todo, setTodo] = useState('');
-  const [todoList, setTodoList] = useState([]);
-
-  //렌더링 시 localStorage에서 todoList 불러오기
-  useEffect(() => {
+  const [todoList, setTodoList] = useState(() => {
     const prevTodoList = localStorage.getItem('todoList');
-    if (prevTodoList) {
-      setTodoList(JSON.parse(prevTodoList));
-    }
-  }, []);
+    return prevTodoList ? JSON.parse(prevTodoList) : [];
+  });
 
   //todoList가 변경될 때마다 localStorage에 저장
   useEffect(() => {
@@ -104,9 +98,10 @@ function App() {
 
   function handleComplete(todo) {
     const newTodoList = todoList.map((item) => {
-      if (item.createTime === todo.createTime) {
-        item.isCompleted = !item.isCompleted;
+      if (item.createTime === todo.createTime) { 
+        return { ...item, isCompleted: !item.isCompleted };
       }
+      return item;
     });
     setTodoList(newTodoList);
   }
@@ -123,7 +118,7 @@ function App() {
     <GlobalStyles />
     <Container>
       <Header name={userName} />
-      <InputForm setTodo={setTodo} handleAddTodo={handleAddTodo} />
+      <InputForm handleAddTodo={handleAddTodo} />
       <TodoList
         todoList={todoList}
         handleComplete={handleComplete}
