@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { useState } from 'react';
 
 const InputFormStyle = styled.form`
-    display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 20px;
@@ -31,11 +31,11 @@ const InputStyle = styled.input`
 
 const InputBtnStyle = styled.button`
   border: transparent;
-    border-radius: 4px;
-    background-color: transparent;
-    padding: 2px 7px;
-    font-size: 25px;
-    font-weight: 500;
+  border-radius: 4px;
+  background-color: transparent;
+  padding: 2px 7px;
+  font-size: 25px;
+  font-weight: 500;
   :hover {
     color: green;
     background-color: transparent;
@@ -51,6 +51,11 @@ export default function InputForm({ handleAddTodo }) {
 
   const handleInputSubmit = (e) => {
     e.preventDefault();
+    //입력값이 없으면 alert 띄우기
+    if (todoInput === '') {
+      alert('한 글자 이상 입력해주세요.');
+      return;
+    }
     handleAddTodo(todoInput);
     setTodoInput(''); // input 초기화
   };
@@ -59,7 +64,12 @@ export default function InputForm({ handleAddTodo }) {
     <>
       <InputFormStyle onSubmit={handleInputSubmit}>
         <InputLabelStyle htmlFor="todo-input">할 일 : </InputLabelStyle>
-        <InputStyle id="todo-input" placeholder="할 일을 입력하세요" value={todoInput} onChange={handleInputChange}/>
+        <InputStyle
+          id="todo-input"
+          placeholder="할 일을 입력하세요"
+          value={todoInput}
+          onChange={handleInputChange}
+        />
         <InputBtnStyle id="input-btn" type="submit">
           +
         </InputBtnStyle>

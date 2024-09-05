@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
+import { Global, css } from '@emotion/react';
+import styled from '@emotion/styled';
 import InputForm from './components/InputForm.jsx';
 import TodoList from './components/TodoList.jsx';
 import Header from './components/Header.jsx';
-import { Global, css } from '@emotion/react';
-import styled from '@emotion/styled';
-import { useEffect, useState } from 'react';
 import bgImage from './grid.jpg';
 
 const GlobalStyles = () => (
@@ -73,6 +73,7 @@ const ContainerStyle = styled.div`
 
 function App() {
   const userName = '옹헤';
+  //localStorage에서 todoList 불러오기
   const [todoList, setTodoList] = useState(() => {
     const prevTodoList = localStorage.getItem('todoList');
     return prevTodoList ? JSON.parse(prevTodoList) : [];
@@ -85,17 +86,11 @@ function App() {
 
   //사용자에게 받은 입력으로 todo 추가하기
   function handleAddTodo(todoInput) {
-    if (todoInput === '') {
-      alert('한 글자 이상 입력해주세요.');
-      return;
-    }
-
     const newTodo = {
       createTime: Date.now(),
       content: todoInput,
       isCompleted: false,
     };
-
     setTodoList([...todoList, newTodo]);
   }
 
@@ -120,13 +115,13 @@ function App() {
     <>
       <GlobalStyles />
       <ContainerStyle>
-        <Header name={userName} />
-        <InputForm handleAddTodo={handleAddTodo} />
+        <Header name={userName} /> {/* Header 컴포넌트 */}
+        <InputForm handleAddTodo={handleAddTodo} /> {/* InputForm 컴포넌트 */}
         <TodoList
           todoList={todoList}
           handleComplete={handleComplete}
           handleDelete={handleDelete}
-        />
+        /> {/* TodoList 컴포넌트 */}
       </ContainerStyle>
     </>
   );
