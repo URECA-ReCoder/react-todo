@@ -6,9 +6,10 @@ function Container({ children }) {
   return (
     <div
       css={css({
-        width: '450px',
-        minWidth: '40vw', // 모바일이나 작은 화면에서 잘리길래 화면 설정해주었다.
+        width: '400px',
+        maxWidth: '60vw', // 모바일이나 작은 화면에서 잘리길래 화면 설정해주었다.
         height: 'auto',
+        paddingTop: '5%',
         display: 'flex',
         flexDirection: 'column',
         position: 'absolute',
@@ -61,7 +62,7 @@ function Container({ children }) {
           borderBottom: '2px solid white',
         }}
       >
-        🧾Todo-List
+        Todo-List
       </div>
       {children}
     </div>

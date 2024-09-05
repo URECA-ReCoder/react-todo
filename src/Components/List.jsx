@@ -24,15 +24,27 @@ function List({
       <ul
         css={css({
           // listStyleType: 'none',
-          minHeight: '80px',
-          maxHeight: '150px',
+          height: '80px',
+          minHeight: '13vh',
+          maxHeight: '13vh',
           backgroundColor: 'rgba(255, 255, 255, 0.281)',
           padding: '10px 20px',
           borderRadius: '5px',
           color: '#5e3b3b',
-          overflow: 'auto',
+          overflowY: 'auto',
           boxShadow: '2px 2px 5px 1px rgba(0, 0, 0, 0.11)',
-          fontSize: '14px',
+          fontSize: '0.7rem',
+          '&::-webkit-scrollbar': {
+            width: '8px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: '#f1f1f1',
+            borderRadius: '10px',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            backgroundColor: '#ff9393',
+            borderRadius: '10px',
+          },
         })}
       >
         {items.map((item, index) => (
@@ -43,7 +55,7 @@ function List({
               display: 'flex',
               alignItems: 'center',
               ...(isCompleted && item.style),
-              padding: '2.5px 0',
+              padding: '0.3em 0',
             })}
           >
             {isSelecting && (

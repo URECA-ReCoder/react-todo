@@ -22,10 +22,10 @@ function TodoSection({
 }) {
   return (
     <>
-      <span style={{ fontSize: '20px', fontWeight: '900' }}>
+      <span style={{ fontSize: '20px', fontWeight: '600' }}>
         {title}{' '}
-        <span style={{ marginRight: '10px', fontSize: '14px' }}>
-          [ {items.length} ]  
+        <span style={{ marginRight: '10px', fontSize: '0.7rem', color: 'red' }}>
+          ({items.length})
         </span>
         {/* 목록 아이템의 수를 카운팅하도록 옆에 적어두었습니다. */}
         <img

@@ -34,6 +34,7 @@ export function useTodoList() {
     const toggleSelectingTodoList = () => {
         setIsSelectingTodoList(!isSelectingTodoList);
         setSelectedItems([]);
+
     };
 
     const toggleSelectingDone = () => {
@@ -66,9 +67,11 @@ export function useTodoList() {
         if (isCompleted) {
             newCompletedItems = completedItems.filter((_, index) => !selectedItems.includes(index));
             setCompletedItems(newCompletedItems);
+            setIsSelectingDone(!isSelectingDone);
         } else {
             newActiveItems = activeItems.filter((_, index) => !selectedItems.includes(index));
             setActiveItems(newActiveItems);
+            setIsSelectingTodoList(!isSelectingTodoList);
         }
 
         updateLocalStorage(newActiveItems, newCompletedItems);
@@ -140,7 +143,7 @@ export function useTodoList() {
             newActiveItems = activeItems.filter((_, i) => i !== index);
             setActiveItems(newActiveItems);
         }
-        
+
         updateLocalStorage(newActiveItems, newCompletedItems);
         alert("삭제되었습니다.")
     };

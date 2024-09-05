@@ -23,7 +23,7 @@ function InputValue({ value, onChange, addItem }) {
           borderRadius: '5px',
           // border: '1px solid #ccc',
           border: 'none',
-          width: '300px',
+          width: '80%',
           backgroundColor: 'rgba(222, 222, 222, 0.151)',
           boxShadow: '2px 2px 5px 1px rgba(0, 0, 0, 0.11)',
           '&:focus': {

@@ -38,7 +38,7 @@ function TodoList() {
 
       {/* TodoList Section */}
       <TodoSection
-        title="TodoList"
+        title="📜TodoList"
         items={activeItems}
         isSelecting={isSelectingTodoList}
         selectedItems={selectedItems}
@@ -54,7 +54,7 @@ function TodoList() {
 
       {/* Done Section */}
       <TodoSection
-        title="Done"
+        title="🚩Done"
         items={completedItems}
         isSelecting={isSelectingDone}
         selectedItems={selectedItems}
