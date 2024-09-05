@@ -24,7 +24,8 @@ const ListUlStyle = styled.ul`
 `;
 
 export default function TodoList({ todoList, handleComplete, handleDelete }) {
-  const doList = todoList.filter((todo) => !todo.isCompleted); 
+  // todoList에서 완료되지 않은 todoList와 완료된 todoList를 분리
+  const doList = todoList.filter((todo) => !todo.isCompleted);
   const doneList = todoList.filter((todo) => todo.isCompleted);
 
   return (
