@@ -7,7 +7,7 @@ const ListLiStyle = styled.li`
   gap: 8px;
 `;
 
-const DoListCheckBtn = styled.button`
+const DoBtnStyle = styled.button`
   width: 25px;
   height: 25px;
   border-radius: 8px;
@@ -16,7 +16,7 @@ const DoListCheckBtn = styled.button`
   border-color: #393939;
 `;
 
-const DoneListCheckBtn = styled.button`
+const DoneBtnStyle = styled.button`
   width: 25px;
   height: 25px;
   border-radius: 8px;
@@ -27,14 +27,14 @@ const DoneListCheckBtn = styled.button`
   color: white;
 `;
 
-const DeleteBtn = styled.button`
+const DeleteBtnStyle = styled.button`
   border: transparent;
   background-color: transparent;
   font-size: 20px;
   font-weight: 500;
 `;
 
-const DoneSpan = styled.span`
+const DoneSpanStyle = styled.span`
   text-decoration: line-through;
   color: #b3b3b3;
 `;
@@ -43,16 +43,16 @@ export default function TodoItem({ todo, handleComplete, handleDelete }) {
   return (
     <ListLiStyle>
       {todo.isCompleted ? (
-        <DoneListCheckBtn onClick={() => handleComplete(todo)}>v</DoneListCheckBtn>
+        <DoneBtnStyle onClick={() => handleComplete(todo)}>v</DoneBtnStyle>
       ) : (
-        <DoListCheckBtn onClick={() => handleComplete(todo)}></DoListCheckBtn>
+        <DoBtnStyle onClick={() => handleComplete(todo)}></DoBtnStyle>
       )}
       {todo.isCompleted ? (
-        <DoneSpan>{todo.content}</DoneSpan>
+        <DoneSpanStyle>{todo.content}</DoneSpanStyle>
       ) : (
         <span>{todo.content}</span>
       )}
-      <DeleteBtn onClick={() => handleDelete(todo)}>x</DeleteBtn>
+      <DeleteBtnStyle onClick={() => handleDelete(todo)}>x</DeleteBtnStyle>
     </ListLiStyle>
   );
 }

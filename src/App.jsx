@@ -48,7 +48,7 @@ const GlobalStyles = () => (
   />
 );
 
-const Container = styled.div`
+const ContainerStyle = styled.div`
   position: relative;
   display: flex;
   width: 450px;
@@ -119,7 +119,7 @@ function App() {
   return (
     <>
       <GlobalStyles />
-      <Container>
+      <ContainerStyle>
         <Header name={userName} />
         <InputForm handleAddTodo={handleAddTodo} />
         <TodoList
@@ -127,7 +127,7 @@ function App() {
           handleComplete={handleComplete}
           handleDelete={handleDelete}
         />
-      </Container>
+      </ContainerStyle>
     </>
   );
 }

@@ -1,18 +1,18 @@
 import styled from '@emotion/styled';
 import TodoItem from './TodoItem';
 
-const Section = styled.section`
+const SectionStyle = styled.section`
   margin-top: 20px;
 `;
 
-const SectionTitle = styled.h4`
+const SectionTitleStyle = styled.h4`
   font-size: 20px;
   text-align: left;
   padding: 10px 20px;
   margin: 0;
 `;
 
-const ListUl = styled.ul`
+const ListUlStyle = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -29,9 +29,9 @@ export default function TodoList({ todoList, handleComplete, handleDelete }) {
 
   return (
     <>
-      <Section>
-        <SectionTitle>📋 Todo ({doList.length})</SectionTitle>
-        <ListUl>
+      <SectionStyle>
+        <SectionTitleStyle>📋 Todo ({doList.length})</SectionTitleStyle>
+        <ListUlStyle>
           {doList.map((todo) => 
             <TodoItem
               key={todo.createTime}
@@ -40,11 +40,11 @@ export default function TodoList({ todoList, handleComplete, handleDelete }) {
               handleDelete={handleDelete}
             />
           )}
-        </ListUl>
-      </Section>
-      <Section>
-        <SectionTitle>👍🏻 Done ({doneList.length})</SectionTitle>
-        <ListUl>
+        </ListUlStyle>
+      </SectionStyle>
+      <SectionStyle>
+        <SectionTitleStyle>👍🏻 Done ({doneList.length})</SectionTitleStyle>
+        <ListUlStyle>
           {doneList.map((todo) => 
             <TodoItem
               key={todo.createTime}
@@ -53,8 +53,8 @@ export default function TodoList({ todoList, handleComplete, handleDelete }) {
               handleDelete={handleDelete}
             />
           )}
-        </ListUl>
-      </Section>
+        </ListUlStyle>
+      </SectionStyle>
     </>
   );
 }
