@@ -23,7 +23,11 @@ function TodoSection({
   return (
     <>
       <span style={{ fontSize: '20px', fontWeight: '900' }}>
-        {title}
+        {title}{' '}
+        <span style={{ marginRight: '10px', fontSize: '14px' }}>
+          [ {items.length} ]  
+        </span>
+        {/* 목록 아이템의 수를 카운팅하도록 옆에 적어두었습니다. */}
         <img
           src={isSelecting ? checkbox2 : selItem}
           css={{
