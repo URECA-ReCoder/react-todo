@@ -7,6 +7,7 @@ function Container({ children }) {
     <div
       css={css({
         width: '450px',
+        minWidth: '40vw', // 모바일이나 작은 화면에서 잘리길래 화면 설정해주었다.
         height: 'auto',
         display: 'flex',
         flexDirection: 'column',

@@ -73,6 +73,7 @@ export function useTodoList() {
 
         updateLocalStorage(newActiveItems, newCompletedItems);
         setSelectedItems([]);
+        alert("삭제 되었습니다.")
     };
 
     const moveToCompletedForSelected = () => {
@@ -139,8 +140,9 @@ export function useTodoList() {
             newActiveItems = activeItems.filter((_, i) => i !== index);
             setActiveItems(newActiveItems);
         }
-
+        
         updateLocalStorage(newActiveItems, newCompletedItems);
+        alert("삭제되었습니다.")
     };
 
     return {
