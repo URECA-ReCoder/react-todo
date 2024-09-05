@@ -4,13 +4,15 @@ import Header from './components/Header.jsx';
 import { Global, css } from '@emotion/react';
 import styled from '@emotion/styled';
 import { useEffect, useState } from 'react';
+import bgImage from './grid.jpg';
 
 const GlobalStyles = () => (
   <Global
     styles={css`
       @font-face {
         font-family: 'RixXladywatermelonR';
-        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-4@1.0/RixXladywatermelonR.woff2') format('woff2');
+        src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408-4@1.0/RixXladywatermelonR.woff2')
+          format('woff2');
         font-weight: normal;
         font-style: normal;
       }
@@ -34,13 +36,14 @@ const GlobalStyles = () => (
         scrollbar-width: thin;
         margin: 0;
       }
+
       button {
-    font-family: RixXladywatermelonR;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    flex-wrap: wrap-reverse;
-}
+        font-family: 'RixXladywatermelonR';
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap-reverse;
+      }
     `}
   />
 );
@@ -60,7 +63,7 @@ const Container = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('./grid.jpg');
+    background-image: url(${bgImage});
     background-size: cover;
     background-blend-mode: darken;
     opacity: 0.5;
@@ -98,7 +101,7 @@ function App() {
 
   function handleComplete(todo) {
     const newTodoList = todoList.map((item) => {
-      if (item.createTime === todo.createTime) { 
+      if (item.createTime === todo.createTime) {
         return { ...item, isCompleted: !item.isCompleted };
       }
       return item;
@@ -115,16 +118,16 @@ function App() {
 
   return (
     <>
-    <GlobalStyles />
-    <Container>
-      <Header name={userName} />
-      <InputForm handleAddTodo={handleAddTodo} />
-      <TodoList
-        todoList={todoList}
-        handleComplete={handleComplete}
-        handleDelete={handleDelete}
-      />
-    </Container>
+      <GlobalStyles />
+      <Container>
+        <Header name={userName} />
+        <InputForm handleAddTodo={handleAddTodo} />
+        <TodoList
+          todoList={todoList}
+          handleComplete={handleComplete}
+          handleDelete={handleDelete}
+        />
+      </Container>
     </>
   );
 }
